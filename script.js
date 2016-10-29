@@ -11,7 +11,7 @@ const drawBars = (ctx, list) => {
   list.forEach((val, index, list) => {
     //NOTE(adam): ensure val 0 to 1
     if(val < 0 || val > 1) {
-      console.err('number outside range', val)
+      console.error('number outside range', val)
     }
 
         const height = val * barMaxHeight
