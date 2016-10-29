@@ -58,9 +58,10 @@ const ctx1dList = Array.from(document.querySelectorAll('.canvas1d')).map((c) => 
 ctx1dList.forEach(ctx => ctx.fillStyle = barColor)
 
 
-ctx1dList.forEach((ctx, i) => {
+ctx1dList.forEach((ctx, ctxIndex) => {
+  const freq = 0.1 * (ctxIndex + 1)
   const noise = []
-  const random = makeRandom(i)
-  for(let i = 0; i < barCount; ++i) { noise[i] = Math.cos(i) }
+  const random = makeRandom(ctxIndex)
+  for(let i = 0; i < barCount; ++i) { noise[i] = Math.cos(i * freq) }
   drawBars(ctx, normalize(noise))
 })
