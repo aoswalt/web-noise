@@ -43,8 +43,8 @@ ctx1dList.forEach(ctx => ctx.fillStyle = barColor)
 
 
 ctx1dList.forEach((ctx, i) => {
-  const nums = []
+  const noise = []
   const random = makeRandom(i)
-  for(let i = 0; i < barCount; ++i) { nums[i] = randomInt(0, 3, random)/3 }
-  drawBars(ctx, nums)
+  for(let i = 0; i < barCount; ++i) { noise[i] = randomInt(0, 3, random)/3 }
+  drawBars(ctx, noise)
 })
