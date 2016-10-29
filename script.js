@@ -31,6 +31,12 @@ const makeRandom = (seed_arg) => {
   }
 }
 
+//NOTE(adam): taken from http://stackoverflow.com/questions/10134237/javascript-random-integer-between-two-numbers
+const randomInt = (min, max, randomFunc) => {
+  if(!randomFunc) randomFunc = makeRandom()
+  return Math.floor(randomFunc() * (max - min + 1)) + min
+}
+
 //NOTE(adam): get an array of 2d contexts from the nodelist of canvases
 const ctx1dList = Array.from(document.querySelectorAll('.canvas1d')).map((c) => c.getContext('2d'))
 ctx1dList.forEach(ctx => ctx.fillStyle = barColor)
@@ -39,6 +45,6 @@ ctx1dList.forEach(ctx => ctx.fillStyle = barColor)
 ctx1dList.forEach((ctx, i) => {
   const nums = []
   const random = makeRandom(i)
-  for(let i = 0; i < barCount; ++i) { nums[i] = random() }
+  for(let i = 0; i < barCount; ++i) { nums[i] = randomInt(0, 3, random)/3 }
   drawBars(ctx, nums)
 })
