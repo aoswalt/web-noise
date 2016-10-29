@@ -19,6 +19,18 @@ const drawBars = (ctx, list) => {
   })
 }
 
+//NOTE(adam): normalize noise values to range from 0 to 1
+const normalize = (noise) => {
+  //NOTE(adam): shift so min would be 0
+  const min = Math.min(...noise)
+  noise = noise.map((v) => v - min)
+
+  //NOTE(adam): max is now the full range
+  const max = Math.max(...noise)
+  return noise.map((v) => v / max)
+}
+
+
 //NOTE(adam): taken from http://stackoverflow.com/questions/521295/javascript-random-seeds
 const makeRandom = (seed_arg) => {
   let seed = (seed_arg !== undefined) ? seed_arg : Math.random()  //NOTE(adam): random seed if no argument
@@ -49,6 +61,6 @@ ctx1dList.forEach(ctx => ctx.fillStyle = barColor)
 ctx1dList.forEach((ctx, i) => {
   const noise = []
   const random = makeRandom(i)
-  for(let i = 0; i < barCount; ++i) { noise[i] = randomInt(0, 3, random)/3 }
-  drawBars(ctx, adjacentMin(noise))
+  for(let i = 0; i < barCount; ++i) { noise[i] = Math.cos(i) }
+  drawBars(ctx, normalize(noise))
 })
