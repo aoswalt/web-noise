@@ -19,12 +19,26 @@ const drawBars = (ctx, list) => {
   })
 }
 
+//NOTE(adam): taken from http://stackoverflow.com/questions/521295/javascript-random-seeds
+const makeRandom = (seed_arg) => {
+  let seed = (seed_arg !== undefined) ? seed_arg : Math.random()  //NOTE(adam): random seed if no argument
+
+  if(seed === 0) seed = 0.0001  //NOTE(adam): 0 would always produce 0
+
+  return () => {
+    seed = Math.sin(seed) * 10000;
+    return seed - Math.floor(seed)
+  }
+}
+
 //NOTE(adam): get an array of 2d contexts from the nodelist of canvases
 const ctx1dList = Array.from(document.querySelectorAll('.canvas1d')).map((c) => c.getContext('2d'))
 ctx1dList.forEach(ctx => ctx.fillStyle = barColor)
 
+
 ctx1dList.forEach((ctx, i) => {
   const nums = []
-  for(let i = 0; i < barCount; ++i) { nums[i] = Math.random() }
+  const random = makeRandom(i)
+  for(let i = 0; i < barCount; ++i) { nums[i] = random() }
   drawBars(ctx, nums)
 })
