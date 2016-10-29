@@ -1,4 +1,4 @@
-const barCount = 25
+const barCount = 100
 const barColor = 'green'
 
 //NOTE(adam): draw the list of values as bars on the 2d context
@@ -37,6 +37,10 @@ const randomInt = (min, max, randomFunc) => {
   return Math.floor(randomFunc() * (max - min + 1)) + min
 }
 
+//NOTE(adam): average adjacent values for smoother noise output
+const adjacentMin = (noise) => noise.map((e, i) => i === 0 ? noise[i] : Math.min(noise[i - 1], noise[i]))
+
+
 //NOTE(adam): get an array of 2d contexts from the nodelist of canvases
 const ctx1dList = Array.from(document.querySelectorAll('.canvas1d')).map((c) => c.getContext('2d'))
 ctx1dList.forEach(ctx => ctx.fillStyle = barColor)
@@ -46,5 +50,5 @@ ctx1dList.forEach((ctx, i) => {
   const noise = []
   const random = makeRandom(i)
   for(let i = 0; i < barCount; ++i) { noise[i] = randomInt(0, 3, random)/3 }
-  drawBars(ctx, noise)
+  drawBars(ctx, adjacentMin(noise))
 })
