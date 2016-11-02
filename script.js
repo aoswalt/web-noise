@@ -2,9 +2,10 @@ const barCount = 100
 const barColor = 'green'
 
 //NOTE(adam): draw the list of values as bars on the 2d context
-const drawBars = (ctx, list) => {
-  const barCount = list.length
-  const barWidth = ctx.canvas.width / barCount
+const drawBars = (ctx, raw_list) => {
+  const list = normalize(raw_list)
+  const listBarCount = list.length
+  const barWidth = ctx.canvas.width / listBarCount
   const maxHeight = ctx.canvas.height
   const barMaxHeight = maxHeight * .8
 
@@ -14,7 +15,7 @@ const drawBars = (ctx, list) => {
       console.error('number outside range', val)
     }
 
-        const height = val * barMaxHeight
+    const height = val * barMaxHeight
     ctx.fillRect(barWidth * index, maxHeight - height, barWidth, height)
   })
 }
@@ -38,7 +39,7 @@ const makeRandom = (seed_arg) => {
   if(seed === 0) seed = 0.0001  //NOTE(adam): 0 would always produce 0
 
   return () => {
-    seed = Math.sin(seed) * 10000;
+    seed = Math.sin(seed) * 10000
     return seed - Math.floor(seed)
   }
 }
