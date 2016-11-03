@@ -9,7 +9,7 @@ freqList.forEach((ctx) => ctx.fillStyle = barColor)
 
 freqList.forEach((ctx, ctxIndex) => {
   noiseFunc = Noise.makeNoise((x) => 0.1 * (ctxIndex + 1))
-  Draw.drawNoise(ctx, ctxIndex, noiseFunc)
+  Draw.drawNoise(ctx, noiseFunc)
 })
 
 //NOTE(adam): get an array of 2d contexts from the nodelist of canvases
@@ -19,7 +19,7 @@ ampList.forEach((ctx) => ctx.fillStyle = barColor)
 
 ampList.forEach((ctx, ctxIndex) => {
   noiseFunc = Noise.makeNoise(undefined, (x) => 0.2 * (ctxIndex + 1))
-  Draw.drawNoise(ctx, ctxIndex, noiseFunc)
+  Draw.drawNoise(ctx, noiseFunc)
 })
 
 //NOTE(adam): get an array of 2d contexts from the nodelist of canvases
@@ -31,5 +31,5 @@ mixList.forEach((ctx, ctxIndex) => {
   n1 = Noise.makeNoise((x) => 0.008 * (ctxIndex + 1) * x, (x) => 0.2 * (ctxIndex + 1))
   n2 = Noise.makeNoiseOffset((x) => 0.03 * (ctxIndex + 1) * x, (x) => 0.4 * (ctxIndex + 1))
   noiseFunc = (x) => n1(x) * n2(x)
-  Draw.drawNoise(ctx, ctxIndex, noiseFunc)
+  Draw.drawNoise(ctx, noiseFunc)
 })
