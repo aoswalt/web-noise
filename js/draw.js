@@ -29,5 +29,15 @@ var Draw = ((draw) => {
     })
   }
 
+  //NOTE(adam): draw bar graph of noise
+  draw.drawNoise = (ctx, ctxIndex, noiseFunc) => {
+    const noise = []
+    for(let i = 0; i < barCount; ++i) {
+      noise[i] = noiseFunc(i)
+    }
+    draw.drawBars(ctx, noise)
+  }
+
+
   return draw
 })(Draw || {})
