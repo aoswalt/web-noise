@@ -9,7 +9,7 @@ freqList.forEach((ctx) => ctx.fillStyle = barColor)
 
 freqList.forEach((ctx, ctxIndex) => {
   i = ctxIndex + 1
-  noiseFunc = Noise.makeNoise((x) => 0.1 * i)
+  noiseFunc = Noise.makeCosNoise((x) => 0.1 * i)
   Draw.drawNoise(ctx, noiseFunc)
 })
 
@@ -20,7 +20,7 @@ ampList.forEach((ctx) => ctx.fillStyle = barColor)
 
 ampList.forEach((ctx, ctxIndex) => {
   i = ctxIndex + 1
-  noiseFunc = Noise.makeNoise(undefined, (x) => 0.2 * i)
+  noiseFunc = Noise.makeCosNoise(undefined, (x) => 0.2 * i)
   Draw.drawNoise(ctx, noiseFunc)
 })
 
@@ -31,8 +31,8 @@ mixList.forEach((ctx) => ctx.fillStyle = barColor)
 
 mixList.forEach((ctx, ctxIndex) => {
   i = ctxIndex + 1
-  n1 = Noise.makeNoise((x) => 0.0008 * i * x, (x) => 0.2 * i)
-  n2 = Noise.makeNoiseOffset((x) => 0.003 * i * x, (x) => 0.4 * i)
+  n1 = Noise.makeCosNoise((x) => 0.0008 * i * x, (x) => 0.2 * i)
+  n2 = Noise.makeSinNoise((x) => 0.003 * i * x, (x) => 0.4 * i)
   noiseFunc = (x) => n1(x) * n2(x)
   Draw.drawNoise(ctx, noiseFunc)
 })
