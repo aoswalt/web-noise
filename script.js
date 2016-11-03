@@ -31,8 +31,8 @@ mixList.forEach((ctx) => ctx.fillStyle = barColor)
 
 mixList.forEach((ctx, ctxIndex) => {
   i = ctxIndex + 1
-  n1 = Noise.makeNoise((x) => 0.008 * i * x, (x) => 0.2 * i)
-  n2 = Noise.makeNoiseOffset((x) => 0.03 * i * x, (x) => 0.4 * i)
+  n1 = Noise.makeNoise((x) => 0.0008 * i * x, (x) => 0.2 * i)
+  n2 = Noise.makeNoiseOffset((x) => 0.003 * i * x, (x) => 0.4 * i)
   noiseFunc = (x) => n1(x) * n2(x)
   Draw.drawNoise(ctx, noiseFunc)
 })
