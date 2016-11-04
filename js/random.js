@@ -16,9 +16,15 @@ var Random = ((random) => {
   //NOTE(adam): taken from
   //http://stackoverflow.com/questions/10134237/javascript-random-integer-between-two-numbers
   random.randomInt = (min, max, randomFunc) => {
-    if(!randomFunc) randomFunc = makeRandom()
+    if(!randomFunc) randomFunc = random.makeRandom()
     return Math.floor(randomFunc() * (max - min + 1)) + min
   }
+
+  random.range = (min, max, randomFunc) => {
+    if(!randomFunc) randomFunc = random.makeRandom()
+    return randomFunc() * (max - min) + min
+  }
+
 
   return random
 })(Random || {})
