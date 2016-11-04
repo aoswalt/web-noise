@@ -1,7 +1,12 @@
 var Noise = ((noise) => {
   noise.makeNoise = (freq, seed) => {
-    phase = Random.range(0, 2 * Math.PI, Random.makeRandom(seed))
+    const phase = Random.range(0, 2 * Math.PI, Random.makeRandom(seed))
     return (x) => Math.sin(2 * Math.PI * freq * x + phase)
+  }
+
+  noise.makeNoiseSet = (freqList, seed) => {
+    const rand = Random.makeRandom(seed)
+    return freqList.map((f) => noise.makeNoise(f, rand()))
   }
 
   //NOTE(adam): create cosine noise function with freq and amp functions
@@ -23,7 +28,7 @@ var Noise = ((noise) => {
     noise.map((e, i) => i === 0 ? noise[i] : 0.5 * (noise[i - 1] - noise[i]))
 
   noise.weightedSum = (amplitudes, noises) =>
-    noises.reduce((p, c, i) => amplitudes[i] * noises[i])
+    noises.reduce((p, c, i) => p + (amplitudes[i] * noises[i]))
 
 
   return noise
