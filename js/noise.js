@@ -14,6 +14,9 @@ var Noise = ((noise) => {
   noise.smoother = (noise) =>
     noise.map((e, i) => i === 0 ? noise[i] : 0.5 * (noise[i - 1] + noise[i]))
 
+  noise.rougher = (noise) =>
+    noise.map((e, i) => i === 0 ? noise[i] : 0.5 * (noise[i - 1] - noise[i]))
+
 
   return noise
 })(Noise || {})

@@ -57,3 +57,14 @@ redList.forEach((ctx, ctxIndex) => {
   noiseFunc = (x) => Random.range(-1, 1, rand)
   Draw.drawNoise(ctx, noiseFunc, Noise.smoother)
 })
+
+
+const violetList = Array.from(document.querySelectorAll('.violetNoise'))
+  .map((c) => c.getContext('2d'))
+violetList.forEach((ctx) => ctx.fillStyle = barColor)
+
+violetList.forEach((ctx, ctxIndex) => {
+  const rand = Random.makeRandom(ctxIndex)
+  noiseFunc = (x) => Random.range(-1, 1, rand)
+  Draw.drawNoise(ctx, noiseFunc, Noise.rougher)
+})
