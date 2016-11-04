@@ -68,3 +68,12 @@ violetList.forEach((ctx, ctxIndex) => {
   noiseFunc = (x) => Random.range(-1, 1, rand)
   Draw.drawNoise(ctx, noiseFunc, Noise.rougher)
 })
+
+
+const phaseList = Array.from(document.querySelectorAll('.phase'))
+  .map((c) => c.getContext('2d'))
+phaseList.forEach((ctx) => ctx.fillStyle = barColor)
+
+phaseList.forEach((ctx, ctxIndex) => {
+  Draw.drawNoise(ctx, Noise.makeNoise(1 / barCount, ctxIndex + 1))
+})

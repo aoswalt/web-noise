@@ -1,4 +1,9 @@
 var Noise = ((noise) => {
+  noise.makeNoise = (freq, seed) => {
+    phase = Random.range(0, 2 * Math.PI, Random.makeRandom(seed))
+    return (x) => Math.sin(2 * Math.PI * freq * x + phase)
+  }
+
   //NOTE(adam): create cosine noise function with freq and amp functions
   noise.makeCosNoise = (freqFunc = (x) => 1, ampFunc = (x) => 1) =>
     (x) => Math.cos(ampFunc(x) + x * freqFunc(x))
