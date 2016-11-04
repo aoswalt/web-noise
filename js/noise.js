@@ -11,6 +11,9 @@ var Noise = ((noise) => {
   noise.adjacentMin = (noise) =>
     noise.map((e, i) => i === 0 ? noise[i] : Math.min(noise[i - 1], noise[i]))
 
+  noise.smoother = (noise) =>
+    noise.map((e, i) => i === 0 ? noise[i] : 0.5 * (noise[i - 1] + noise[i]))
+
 
   return noise
 })(Noise || {})
