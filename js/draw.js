@@ -1,4 +1,6 @@
 var Draw = ((draw) => {
+  const barColor = 'green'
+
   //NOTE(adam): normalize noise values to range from 0 to 1
   const normalize = (noise) => {
     //NOTE(adam): shift so min would be 0
@@ -36,6 +38,13 @@ var Draw = ((draw) => {
       noise[i] = noiseFunc(i)
     }
     draw.drawBars(ctx, finishFunc(noise))
+  }
+
+  draw.getCtxList = (className) => {
+    const list = Array.from(document.querySelectorAll('.' + className))
+      .map((c) => c.getContext('2d'))
+    list.forEach((ctx) => ctx.fillStyle = barColor)
+    return list
   }
 
 

@@ -22,6 +22,9 @@ var Noise = ((noise) => {
   noise.rougher = (noise) =>
     noise.map((e, i) => i === 0 ? noise[i] : 0.5 * (noise[i - 1] - noise[i]))
 
+  noise.weightedSum = (amplitudes, noises) =>
+    noises.reduce((p, c, i) => amplitudes[i] * noises[i])
+
 
   return noise
 })(Noise || {})
